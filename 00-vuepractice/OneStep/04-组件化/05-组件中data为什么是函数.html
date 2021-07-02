@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 组件实例 -->
+    <computer></computer>
+    <computer></computer>
+    <computer></computer>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+
+<template id="computer">
+
+    <div>
+        {{number}}<br>
+        <button @click="add">+</button>
+        <button @click="sub" :disabled="number <= 0">-</button>
+    </div>
+
+</template>
+
+
+<script>
+
+    const xx = {
+        number: 0
+    }
+
+    Vue.component("computer", {
+        template: '#computer',
+        // 组件中data为函数是为了保证在复用的时候不相互影响
+        data() {
+            // return {
+            //     number: 0
+            // }
+            return xx
+        },
+        methods: {
+            add() {
+                this.number += 1
+            },
+            sub() {
+                this.number -= 1
+            }
+        }
+    })
+
+
+    const app = new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>
+
+</body>
+</html>

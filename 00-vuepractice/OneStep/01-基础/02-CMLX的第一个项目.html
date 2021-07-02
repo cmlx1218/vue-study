@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>赤名莉香的第一个Web项目</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div>赤名莉香的第一个项目</div>
+<div id="app">
+    {{message}}<br>
+    <span v-bind:title="mess">鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+    <h1 v-if="flag">哼</h1>
+    <h4 v-for="field in fields">{{field}}</h4>
+    <button v-on:click="reverseMessage">翻转消息</button>
+    <input v-model="message">
+
+    <ol>
+        <todo-item v-for="item in groceryList"
+                   v-bind:todo="item"
+                   v-bind:key="item.id"></todo-item>
+    </ol>
+
+</div>
+
+<script>
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{todo.text}}</li>'
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "你在看您嘛呢",
+            mess: '页面加载于' + new Date().toLocaleString(),
+            flag: true,
+            fields: [
+                1, 2, 3, 4, 5
+            ],
+            groceryList: [
+                {id: 0, text: '蔬菜'},
+                {id: 1, text: '奶酪'},
+                {id: 2, text: '随便其它什么人吃的东西'}
+            ]
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

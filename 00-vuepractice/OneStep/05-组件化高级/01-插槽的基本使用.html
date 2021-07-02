@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn10></cpn10>
+    <cpn10><span>第一个自定义</span></cpn10>
+    <cpn10><i>赤名莉香</i></cpn10>
+    <cpn10><b>永尾完治</b></cpn10>
+    <cpn10></cpn10>
+</div>
+
+<template id="cpn10">
+    <div>
+        <span>这里是插槽的基本使用</span>
+        <slot>
+            <button>按钮</button>
+        </slot>
+    </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+
+<script>
+
+    const cpn10 = {
+        template: '#cpn10',
+        data() {
+            return {
+                message: '插槽'
+            }
+        }
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn10
+        }
+    })
+</script>
+</body>
+</html>

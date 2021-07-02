@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+    <button @click="update">改变数组数据</button>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            items: ['a', 'b', 'c', 'd']
+        },
+        methods:{
+            update: function () {
+                // 页面不会响应式
+                this.items[0] = 'vvv'
+                // 页面会响应式
+                // push
+                // pop：删除数组中最后一个元素
+                // shift：删除数组中第一个元素
+                // unshift：在数据最前面添加元素
+                // splice：删除|插入|替换元素，
+                //         如果是删除元素，第一个参数开始位置，第二个参数删除数量(start,count)
+                //         如果是替换元素，第二个参数是要替换几个元素,第三个参数开始依次传入要替换的元素(start,count,'a','b',...)
+                //         如果是插入元素，第二个参数传0表示插入元素，第三个参数开始依次传入要添加的元素
+                // sort：排序
+                // reverse：反转
+                // Vue.set(this.items,0,'xxxxx')
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

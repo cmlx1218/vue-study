@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn07 @item-click="cpnClick"></cpn07>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+
+<template id="cpn07">
+    <div>
+        <button v-for="category in categories" @click="btnClick(category)">{{category.name}}</button>
+    </div>
+</template>
+
+
+<script>
+    const cpn07 = {
+        template: '#cpn07',
+        data() {
+            return {
+                categories: [
+                    {id: '001', name: '热门推荐'},
+                    {id: '002', name: '手机数码'},
+                    {id: '003', name: '家用电器'},
+                    {id: '004', name: '电脑办公'},
+                ]
+            }
+        },
+        methods: {
+            btnClick: function (category) {
+                this.$emit('item-click', category)
+            }
+        }
+    }
+
+
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn07
+        },
+        methods: {
+            cpnClick: function (category) {
+                console.log("父组件接收到数据", category)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录案例(input复用)</title>
+</head>
+<body>
+<script src="../../js/vue.js"></script>
+<!-- 在Vue中处于性能考虑，有虚拟Dom的存在，会尽可能的复用已经存在的元素，而不是重新创建新的元素 -->
+<!-- 如果我们有不希望复用的，可以给不同的标签添加不用的key -->
+<div id="app">
+    <span v-if="isUser">
+        <label for="userName">用户登录</label>
+        <input id="userName" placeholder="用户登录" key="userName">
+    </span>
+    <span v-else>
+        <label for="email">邮箱登录</label>
+        <input id="email" placeholder="邮箱登录" key="email">
+    </span>
+    <button @click="isUser = !isUser">切换登录方式</button>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isUser: true
+        }
+    })
+</script>
+
+</body>
+</html>

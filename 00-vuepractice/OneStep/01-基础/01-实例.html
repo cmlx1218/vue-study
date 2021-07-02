@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一些实例</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+    <h1>{{number}}</h1>
+    <button v-on:click="addNumber">计数器</button>
+</div>
+
+<my-cpn></my-cpn>
+<button-counter></button-counter>
+
+<script>
+    var field = {
+        number: 0
+    }
+
+    // 阻止修改现有的property
+    Object.freeze(field)
+
+    var app = new Vue({
+        el: '#app',
+        data: field,
+        created: function () {
+            console.log('number is ' + this.number)
+        },
+        methods: {
+            addNumber: function () {
+                this.number = this.number + 1
+            }
+        }
+
+    })
+</script>
+
+
+</body>
+</html>

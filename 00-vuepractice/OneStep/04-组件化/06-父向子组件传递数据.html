@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- v-bind 不支持驼峰,在这里可以用 - 代替驼峰 -->
+    <cpn06 :cmovies="movies" :cmessage="message"></cpn06>
+    <!-- 显示默认值 -->
+    <cpn06 :cmovies="movies " :cmessage="message"></cpn06>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+
+<template id="cpn06">
+    <div>
+        <ul>
+            <li v-for="movie in cmovies">{{movie}}</li>
+        </ul>
+        <h2>{{cmessage}}</h2>
+    </div>
+
+</template>
+
+<script>
+
+    /*1、通过props(properties)向子组件传递数据
+    * 2、通过事件向父组件传递数据*/
+
+    const cpn06 = {
+        template: '#cpn06',
+        // 传递数组
+        // props: ['cmovies', 'cmessage']
+        // 传递对象
+        props: {
+            // 1、类型限制
+            // vmovies: Array,
+            // message: String,
+            // 2、提供一些默认值
+            cmessage: {
+                type: String,
+                // type: [String,Number]
+                default: '我是默认值',
+                // 必传
+                required: true
+            },
+            cmovies: {
+                type: Array,
+                // default: [] // vue2.5.17以下数组默认值这样会出错
+                // 类型是对象或者数组时，默认值必须是一个函数
+                default() {
+                    return []
+                }
+            },
+            propE: {
+                type: Object,
+                default: function () {
+                    return {
+                        message: 'hello'
+                    }
+                }
+            },
+            propF: {
+                type: Object,
+                default: function (value) {
+                    // 这个值必须匹配下列字符串中的一个
+                    return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                }
+            }
+        },
+        data: {}
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你成功了',
+            movies: ['黑猫警长', '天天向上', '小虎返乡']
+        },
+        components: {
+            cpn06
+        }
+    })
+</script>
+
+</body>
+</html>

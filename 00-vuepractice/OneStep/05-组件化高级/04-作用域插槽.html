@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域插槽</title>
+</head>
+<body>
+
+<div id="app">
+
+    <cpn04></cpn04>
+
+    <cpn04>
+        <div slot-scope="slot">
+            <span>{{slot.ls.join(' * ')}}</span>
+        </div>
+
+    </cpn04>
+    <cpn04>
+        <div slot-scope="slot">
+            <span>{{slot.ls.join(' - ')}}</span>
+        </div>
+    </cpn04>
+
+</div>
+
+<template id="cpn04">
+
+    <slot :ls="pLanguages">
+        <ul>
+            <li v-for="language in pLanguages">{{language}}</li>
+        </ul>
+    </slot>
+
+</template>
+
+
+<script src="../../js/vue.js"></script>
+
+<script>
+
+    /* 父组件替换插槽的标签，但是内容由子组件提供 */
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn04: {
+                template: '#cpn04',
+                data() {
+                    return {
+                        pLanguages: ['GO', 'Python', 'Swift', 'Java', 'C']
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

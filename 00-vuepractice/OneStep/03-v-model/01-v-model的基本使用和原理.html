@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+    <!--    双向绑定三种方式-->
+    <!--    <input :value="message" @input="valueChange">-->
+    <!--    <input :value="message" @input="message = $event.target.value">-->
+    <!-- text -->
+    <label>
+        <input type="text" v-model="message">
+    </label>
+    {{message}}<br>
+
+    <!-- radio -->
+    <label>
+        <!-- name一样只能选择一个，有v-model就可以省略name -->
+        <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+    </label>
+    <label>
+        <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+    </label><br>
+    {{sex}}
+
+    <!-- checkbox单选框 -->
+    <!-- label标签的好处，点后面文字也可以选中 -->
+    <label for="agree">
+        <input type="checkbox" id="agree" v-model="isAgree">同意协议
+    </label>
+    <button :disabled="!isAgree">下一步</button>
+    <br>
+
+    <!-- checkbox复选框 -->
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球<br>
+
+    <!-- select -->
+    <select name="fruit" v-model="fruit" multiple>
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="草莓">草莓</option>
+        <option value="榴莲">榴莲</option>
+    </select>
+
+    <!-- 值绑定:数据动态获取来自服务端渲染 -->
+    <label v-for="item in OriginHobbies" for="item">
+        <input type="checkbox" :value="item" :id="item">{{item}}
+    </label>
+
+    <!-- 修饰符的使用 -->
+    <!-- lazy -->
+    <input type="text" v-model.lazy="message">
+    <!-- number：v-model默认传递的是string类型 -->
+    <input type="text" v-model.number="age">
+    {{age}} {{typeof age}}
+    <!-- trim：拨出两边的空格 -->
+    <input type="text" v-model.trim="name">
+    {{name}}
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '我是你爸爸',
+            sex: '女',
+            isAgree: false, // 单选框
+            hobbies: [],     // 多选框
+            // fruit: '香蕉', // select 一个是字符串，多个是数组
+            fruit: [],
+            OriginHobbies: ['足球', '篮球', '羽毛球'],
+            age: 3,
+            name: 'cmlx'
+        },
+        methods: {
+            valueChange: function (event) {
+                this.message = event.target.value
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

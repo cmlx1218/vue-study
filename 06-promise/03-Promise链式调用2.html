@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 网络请求 aaa
+    // 自己处理 aaa+111
+    // 自己处理 aaa+111+111
+
+    // new Promise(((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('aaa')
+    //         // reject('error message')
+    //     })
+    // })).then(res => {
+    //     return new Promise(resolve => {
+    //         resolve(res + '111')
+    //     })
+    // }, error => {
+    //     console.log(error);
+    // }).then(res => {
+    //     return new Promise(resolve => {
+    //         resolve(res + '222')
+    //     })
+    // }).then(res => {
+    //     console.log(res);
+    // })
+
+
+    // 另一种写法
+    // new Promise(((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('aaa')
+    //     },2000)
+    // })).then(res => {
+    //     return Promise.resolve(res + '111')
+    // }).then(res => {
+    //     return Promise.resolve(res + '222')
+    // }).then(res => {
+    //     console.log(res);
+    // })
+
+    // 最优解
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // resolve('aaa')
+            // 调用失败时 error=> 处理
+            reject('error message')
+            // throw 'error'
+        }, 2000)
+    }).then(res => {
+        // 或者处理的时候发现异常直接抛出
+        // throw 'error msg'
+        return res + '111'
+    }, error => {
+        // 抛出异常
+        throw error
+    }).then(res => {
+        return res + '222'
+    }).then(res => {
+        console.log(res);
+    }).catch(error => {
+
+        // 捕获异常
+        console.log(error);
+    })
+
+
+</script>
+
+</body>
+</html>

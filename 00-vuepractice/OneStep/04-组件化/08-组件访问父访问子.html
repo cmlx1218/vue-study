@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn08 ref="c1"></cpn08>
+    <cpn08 ref="c2"></cpn08>
+    <cpn08 ref="c3"></cpn08>
+    <button @click="btnClick">按钮</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+
+<template id="cpn08">
+    <div>
+        {{message}}
+    </div>
+</template>
+
+<script>
+
+    const cpn08 = {
+        template: '#cpn08',
+        data() {
+            return {
+                message: '这里是子组件的属性'
+            }
+        },
+        methods: {
+            showMessage() {
+                return '这里是子组件的方法'
+            }
+        }
+
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn08
+        },
+        methods: {
+            btnClick(){
+                // console.log(this.$children[0])
+                console.log(this.$refs.c1.message)
+                console.log(this.$refs.c1.showMessage())
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

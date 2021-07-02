@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn2></cpn2>
+    <cpn1></cpn1>
+</div>
+
+<script src="../../js/vue.js"></script>
+
+<script>
+
+    // 子组件
+    const cpn11 = Vue.extend({
+        template: `
+        <div>
+            <h3>这里是第一个组件</h3>
+        </div>
+        `
+    })
+
+    // 父组件
+    const cpn12 = Vue.extend({
+        template: `
+          <div>
+          <h3>这里是第二个组件</h3>
+          <cpn1></cpn1>
+          </div>
+        `,
+        components: {
+            cpn1: cpn11
+        }
+    })
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn2: cpn12,
+            // 需要在这里注册才能使用
+            cpn1: cpn11
+        }
+    })
+</script>
+</body>
+</html>

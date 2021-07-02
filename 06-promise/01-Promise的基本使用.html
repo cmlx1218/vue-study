@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 1、使用SetTimeout
+    setTimeout(() => {
+        console.log("Hello")
+    }, 2000)
+
+    // 2、使用Promise
+    new Promise(() => {
+
+    })
+
+    // 什么情况下使用Promise？
+    // 一般情况下是有异步操作时，使用Promise对这个异步操作进行封装
+    // new -> 构造函数(1.保存一些状态信息 2.执行传入的函数)
+    // 在执行传入的回调函数时，会传入两个参数，resolve，reject.本身又是函数
+    // 链式编程
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // 1、成功的时候调用resolve
+            // resolve('Hello World')
+            // 2、失败的使用调用reject
+            reject('error message')
+        }, 2000)
+    }).then((date) => {
+        console.log(date)
+        console.log(date)
+        console.log(date)
+        console.log(date)
+        console.log(date)
+    }).catch((err) => {
+        console.log(err)
+    })
+
+</script>
+
+</body>
+</html>

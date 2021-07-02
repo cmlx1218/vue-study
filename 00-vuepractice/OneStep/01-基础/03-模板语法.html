@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+
+    {{message}}
+    <span v-once>这个值不会变：{{message}}</span>
+
+    <p>Using mustaches: {{ rawHtml }}</p>
+    <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+    {{ false ? 'xxx' : 'yyy'}}
+
+    <a :href="url">www.baidu.com</a>
+<!--    <a v-bind:[attributeName]="url">www.baidu.com</a>-->
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '模板语言',
+            rawHtml: '<a>xxx</a>xxx',
+            url: 'http://www.baidu.com',
+            // attributeName: 'href'
+        }
+    })
+</script>
+
+
+
+</body>
+</html>

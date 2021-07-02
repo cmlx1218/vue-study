@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性和侦听器</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<!-- 计算属性缓存 vs 方法 -->
+<div id="app">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <p>Computed reversed message: "{{ reversedMessages() }}"</p>
+</div>
+
+<!-- 计算属性 vs 侦听属性 -->
+<div id="app1">
+    <p>yyy {{fullName1}}</p>
+    <p>xxx {{oneName}}</p>
+</div>
+
+<script>
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            firstName: 'CM',
+            endName: 'LX',
+            fullName: 'CMLX'
+        },
+        watch: {
+            firstName: function (val) {
+                this.fullName = val + '' + this.endName
+            },
+            endName: function (val) {
+                this.fullName = this.firstName + '' + val
+            }
+        },
+        computed: {
+            fullName1: function () {
+                return this.firstName + this.endName
+            },
+            // 计算属性的 setter
+            oneName: {
+                get: function () {
+                    return this.firstName + this.endName
+                },
+                set: function (newValue) {
+                    var names = newValue.split(' ')
+                    this.firstName = names[0]
+                    this.endName = names[names.length - 1]
+                }
+            }
+        }
+    })
+</script>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '你在看你嘛呢'
+        },
+        // 计算属性是基于他们的响应式依赖进行缓存的，只有message发生改变时才会重新计算值。没改变时会立即返回之前的计算结果
+        computed: {
+            reversedMessage: function () {
+                return this.message.split('').reverse().join('')
+            }
+        },
+        methods: {
+            reversedMessages: function () {
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
