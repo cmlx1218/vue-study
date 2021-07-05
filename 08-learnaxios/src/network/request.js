@@ -10,8 +10,28 @@ export function requestNotLogin(config) {
       'Authorization': 'Basic Y21zOkFpbXlGaXRuZXNz',
     },
     params: {
-       'grant_type': 'cmspassword'
+      'grant_type': 'cmspassword'
     }
+  })
+
+  // axios拦截器
+  // 1、请求拦截器
+  instance.interceptors.request.use(config => {
+    console.log(config);
+    // config中一些信息不符合服务器要求
+    // 每次发送网络请求时，希望在界面显示一个请求的图标
+    // 某些网络请求(比如登录(token))，必须携带一些特殊的信息
+    return config
+  }, error => {
+    console.log(error);
+  })
+
+  // 2、响应拦截器
+  instance.interceptors.response.use(result => {
+    console.log(result)
+    return result.data
+  }, error => {
+    console.log(error)
   })
 
   return instance(config)
