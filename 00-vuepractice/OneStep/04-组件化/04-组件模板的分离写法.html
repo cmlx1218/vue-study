@@ -9,8 +9,14 @@
 <div id="app">
     <cpn11></cpn11>
     <cpn22></cpn22>
-
+    <cpn33></cpn33>
 </div>
+
+<template id="cpn33">
+    <div>
+        <h2>我再来试试{{msg}}</h2>
+    </div>
+</template>
 
 <script src="../../js/vue.js"></script>
 
@@ -45,9 +51,21 @@
         template: '#cpn22'
     })
 
+    // Vue.component("cpn33", {template: '#cpn33'});
+
     const app = new Vue({
         el: '#app',
-        data: {}
+        data: {},
+        components: {
+            "cpn33": {
+                template: '#cpn33',
+                data() {
+                    return {
+                        msg: 'zzzzzzzzzz'
+                    }
+                }
+            }
+        }
     })
 
 </script>

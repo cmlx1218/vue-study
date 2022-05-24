@@ -46,7 +46,10 @@ const router = new Router({
         title: '关于'
       },
       // name: About,
-      component: () => import('../components/About')
+      component: () => import('../components/About'),
+      beforeEnter: (to, from, next) => {
+        next();
+      },
     },
     {
       path: '/user/:userId',

@@ -8,9 +8,9 @@
 
 <div id="app">
     <!-- v-bind 不支持驼峰,在这里可以用 - 代替驼峰 -->
-    <cpn06 :cmovies="movies" :cmessage="message"></cpn06>
+    <cpn06 :c-movies="movies" :c-message="message"></cpn06>
     <!-- 显示默认值 -->
-    <cpn06 :cmovies="movies " :cmessage="message"></cpn06>
+    <cpn06 :c-movies="movies " :c-message="message"></cpn06>
 
 </div>
 
@@ -19,9 +19,9 @@
 <template id="cpn06">
     <div>
         <ul>
-            <li v-for="movie in cmovies">{{movie}}</li>
+            <li v-for="movie in cMovies">{{movie}}</li>
         </ul>
-        <h2>{{cmessage}}</h2>
+        <h2>{{cMessage}}</h2>
     </div>
 
 </template>
@@ -41,14 +41,14 @@
             // vmovies: Array,
             // message: String,
             // 2、提供一些默认值
-            cmessage: {
+            cMessage: {
                 type: String,
                 // type: [String,Number]
                 default: '我是默认值',
                 // 必传
                 required: true
             },
-            cmovies: {
+            cMovies: {
                 type: Array,
                 // default: [] // vue2.5.17以下数组默认值这样会出错
                 // 类型是对象或者数组时，默认值必须是一个函数
